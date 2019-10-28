@@ -29,13 +29,7 @@ let timeLimits = {
   timer: 20
 }
 
-// let resImg = 
-// {
-//   left,
-//   right,
-//   draw
-// }
-
+let scene0Sound;
 
 function getTimer() {
   if (frameCount % 60 !== 0) return timeLimits.timer;
@@ -84,16 +78,19 @@ function getImg(type = 'left') {
 //   return imgs.right[imgIndex.right];
 // }
 
+
 function drawScene0() {
 
   image(coverImg,0,0);
   //background(255);
   textSize(20);
-  text("Press Space to Start", width / 2, 380);
-
+  text("Press Space to Start", width / 2, 380); 
+  
+  
 }
 
 function drawScene1() {
+  scene1Sound.stop();
   let time = getTimer();
   background(255);
 
@@ -171,6 +168,7 @@ function drawScene2() {
 }
 
 
+
 function preload() {
   coverImg = loadImage('cover.png');
   
@@ -194,6 +192,12 @@ function preload() {
 
   imgIndex.left = imgs.left.length;
   imgIndex.right = imgs.right.length;
+  
+  
+  //sound
+  soundFormats("mp3");
+  scene0Sound = loadSound("scene0BG.mp3");
+  scene1Sound = loadSound("scene1BG.mp3");
 }
 
 function keyPressed() {
@@ -207,6 +211,8 @@ function keyPressed() {
 function setup() {
   createCanvas(600, 400);
   textAlign(CENTER, CENTER);
+  scene0Sound.setVolume(0.5);
+  scene0Sound.play();
 }
 
 function draw() {
